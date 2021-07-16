@@ -1,9 +1,11 @@
 package ru.netology.manager;
 
 import ru.netology.domain.Ticket;
+import ru.netology.domain.TimeComparator;
 import ru.netology.repository.TicketRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 
 public class TicketManager {
@@ -29,6 +31,19 @@ public class TicketManager {
             }
         }
         Arrays.sort(found);
+        return found;
+    }
+    public Ticket[] searchByAirports2(String from, String to, Comparator<Ticket> comparator) {
+        Ticket[] found = new Ticket[0];
+        for (Ticket tick : repository.findAll()) {
+            if (tick.matches(from, to)) {
+                Ticket[] tmp = new Ticket[found.length + 1];
+                System.arraycopy(found, 0, tmp, 0, found.length);
+                tmp[tmp.length - 1] = tick;
+                found = tmp;
+            }
+        }
+        Arrays.sort(found, comparator);
         return found;
     }
 }
