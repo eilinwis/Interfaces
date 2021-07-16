@@ -33,7 +33,7 @@ public class TicketManager {
         Arrays.sort(found);
         return found;
     }
-    public Ticket[] searchByAirportsAndSortByTime(String from, String to, Comparator<Ticket> comparator) {
+    public Ticket[] searchByAirports2(String from, String to, Comparator<Ticket> comparator) {
         Ticket[] found = new Ticket[0];
         for (Ticket tick : repository.findAll()) {
             if (tick.matches(from, to)) {
